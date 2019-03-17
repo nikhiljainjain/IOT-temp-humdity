@@ -3,8 +3,8 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char *ssid =  "hehehe";     // replace with your wifi ssid and wpa2 key
-const char *pass =  "vayujkandoi";
+const char *ssid =  "WIFI NAME"; 
+const char *pass =  "wifi password";
 
 WiFiClient client;
 #ifdef ESP32
