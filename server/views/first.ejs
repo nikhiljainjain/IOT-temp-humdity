@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>IOT BASED TEMPERATURE AND HUMIDITY</title>
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+		<script async src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+		<style>
+			@viewport {
+				width: device-width ;
+				zoom: 1.0 ;
+			}
+			body{
+				width:100%;
+				height:100%;
+				background: #000000;
+				background: -webkit-linear-gradient(to right, #000000, #434343); /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to right, #000000, #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+				<!--background-repeat: no-repeat-->
+				<!--background-size: cover-->
+			}
+			#container{
+				width:450px;
+				height: 120px;
+				margin: 50px auto auto auto;
+			}
+			#container1{
+				width: 200px;
+				height: 100px;
+				margin: auto 20px auto 25px;
+				margin-right: 5px;
+				border: 2px solid #2980b9;
+				background: white;
+				float: left;
+			}
+			#container2{
+				width: 170px;
+				height: 50px;
+				margin: 15px auto auto auto;
+				padding: 10px 0 10px 10px;
+				background: white;
+				border-radius: 20px;
+				border: 2px solid #2980b9;
+				float: left;
+			}
+			#button{
+				margin: auto auto auto auto;
+				text-align: center;
+				padding-bottom: 20px;
+			}
+			button{
+				border-radius: 100%;
+				padding: 20px;
+ 				box-shadow: 0px 3px 0px 0px rgb(34,34,34), /* 1st Shadow */
+          		0px 7px 10px 0px rgb(17,17,17), /* 1nd Shadow */
+          		inset 0px 1px 1px 0px rgba(250, 250, 250, .2), /* 3rd Shadow */
+         		inset 0px -12px 35px 0px rgba(0, 0, 0, .5); /* 4th Shadow */
+         		outline: none;
+			}
+			.fa-power-off{
+				font-size: 60px;
+				color: white;
+			}
+			#chartContainer{
+				width: 400px;
+				height: 300px;
+				margin: auto auto auto auto;
+				background: white;
+				text-align: center;
+			}
+			.fa-thermometer-half{
+				font-size: 30px;
+				color: black;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="container">
+			<div id="container1">
+				<img async src="https://static.thenounproject.com/png/18677-200.png" id="image" style='height: 100%; width: 100%;'>
+			</div>
+			<div id="container2">
+				<i class="fa fa-thermometer-half"></i>  <strong><span style="font-size: 30px"><%= parameter[(parameter.length)-1].y %></span>&#8451</strong></strong><br>
+				<strong>HUMIDITY</strong>: <strong><span style="font-size: 20px"><%= hum %></span>%</strong>
+			</div>
+		</div>
+			<div id="button">
+				<button>
+				<i class="fa fa-power-off">
+				</i></button></div>
+				
+			<div id="chartContainer" style="height: 300px; width: 100%; position: relative;"></div>
+	</body>
+	<script type="text/javascript">
+
+	window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "",
+	title:{
+		text: ""
+	},
+	axisY:{
+		gridLines: false,
+		includeZero: false,
+		suffix: '°C'
+	},
+	axisX:{
+		gridLines: false,
+		includeZero:false,
+		suffix: "hrs"
+	},
+	data: [{        
+		type: "line",       
+		dataPoints: [ 
+			<%= parameter %>
+		]
+	}]
+});
+chart.render();
+}
+
+	var button = document.querySelector("button");
+	var container1 = document.getElementById("container1");
+	
+	if (<%= led %> == 0){
+		button.style.background = "red";	
+	}else{
+		button.style.background = "green";
+	}
+	
+	
+
+	button.addEventListener("click",function(){
+		if(button.style.background == "red"){
+			button.style.background = "green";	
+			document.getElementById('image').src = "https://static.wixstatic.com/media/0f9a83_d024ec36cf2d486885afa746026151b6~mv2.gif";
+			$.get( "/led/green",(data)=>{
+				console.log(data);
+			});			
+		}
+		else{
+			button.style.background = "red";	
+			document.getElementById('image').src = "https://static.thenounproject.com/png/18677-200.png";	
+			$.get("/led/red/",(data)=>{
+				console.log(data);
+				
+			});			
+		} 
+
+	})
+	</script>
+</html>
