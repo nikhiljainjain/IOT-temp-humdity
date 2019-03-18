@@ -11,7 +11,7 @@ FrontEnd --> VAYUJ KANDOI<br>
   <li>Go to server folder via "CMD/TERMINAL"</li>
   <li>Configure database url in config.js</li>
   <li>type <b>npm install</b></li>
-  <li>then type "npm start" for start</li>
+  <li>then type "npm start" to start</li>
   <li>Enter server address on node_mcu.ino file</li>
   <li>Set DHT sensor according to pin config in the file</li>
   <li>Enter wifi name & password in node_mcu.ino file</li>
