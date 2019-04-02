@@ -27,7 +27,7 @@ nodemcu represented by LED</i>
 <br>
 <i>Project Sample pictures</i><br>
 <b>Portol Images</b><br>
-<img src="./images/ac_off.png" /><br>
+<img src="./images/ac_off.png" width="100" height="100" /><br>
 <b>Nodemcu images</b><br>
-<img src="./images/node_mcu.jpg" /><br>
+<img src="./images/node_mcu.jpg" width="100" height="100" /><br>
 
