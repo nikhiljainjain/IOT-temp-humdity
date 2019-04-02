@@ -114,7 +114,8 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		suffix: "hrs"
 	},
 	data: [{        
-		type: "line",       
+		type: "area",
+    	xValueType: "dateTime",       
 		dataPoints: [ 
 			<%= parameter %>
 		]
